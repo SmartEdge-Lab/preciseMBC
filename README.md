@@ -1,6 +1,6 @@
 # Precise MBC
 
-Sitio web bilingue de Precise MBC, una firma de medical billing especializada en practicas OBGYN del sur de Florida. El proyecto esta construido con Astro y publica contenido en ingles y espanol con rutas localizadas, SEO base, sitemap y componentes reutilizables.
+Precise MBC is a bilingual marketing website for an OBGYN medical billing company serving South Florida practices. The site is built with Astro and includes localized English and Spanish routes, reusable content sections, baseline SEO, sitemap generation, and structured business metadata.
 
 ## Stack
 
@@ -8,20 +8,20 @@ Sitio web bilingue de Precise MBC, una firma de medical billing especializada en
 - Tailwind CSS 4 via Vite
 - Astro Sitemap
 - Astro SEO
-- Astro Icon con iconos Lucide
-- Node.js 22.12 o superior
+- Astro Icon with Lucide icons
+- Node.js 22.12 or newer
 
-## Rutas principales
+## Main Routes
 
-- `/` redirige a `/en/`
-- `/en/` pagina principal en ingles
-- `/es/` pagina principal en espanol
-- `/en/privacy` y `/es/privacy`
-- `/en/terms` y `/es/terms`
+- `/` redirects to `/en/`
+- `/en/` English home page
+- `/es/` Spanish home page
+- `/en/privacy` and `/es/privacy`
+- `/en/terms` and `/es/terms`
 
-La configuracion de i18n vive en `astro.config.mjs` y las traducciones estan centralizadas en `src/i18n/ui.ts`.
+The i18n configuration lives in `astro.config.mjs`, and site copy is centralized in `src/i18n/ui.ts`.
 
-## Estructura
+## Project Structure
 
 ```text
 /
@@ -48,30 +48,30 @@ La configuracion de i18n vive en `astro.config.mjs` y las traducciones estan cen
 └── README.md
 ```
 
-## Desarrollo local
+## Local Development
 
-Instala dependencias:
+Install dependencies:
 
 ```sh
 npm install
 ```
 
-Inicia el servidor de desarrollo:
+Start the development server:
 
 ```sh
 npm run dev
 ```
 
-Por defecto, Astro levanta el sitio en `http://localhost:4321`.
+Astro serves the site at `http://localhost:4321` by default.
 
 ## Scripts
 
-| Comando | Descripcion |
+| Command | Description |
 | --- | --- |
-| `npm run dev` | Inicia el servidor local de desarrollo |
-| `npm run build` | Genera la version de produccion en `dist/` |
-| `npm run preview` | Sirve el build localmente para revisar produccion |
-| `npm run astro` | Ejecuta comandos del CLI de Astro |
+| `npm run dev` | Starts the local development server |
+| `npm run build` | Builds the production site into `dist/` |
+| `npm run preview` | Serves the production build locally |
+| `npm run astro` | Runs Astro CLI commands |
 
 ## Build
 
@@ -79,18 +79,18 @@ Por defecto, Astro levanta el sitio en `http://localhost:4321`.
 npm run build
 ```
 
-El build genera las paginas estaticas, el sitemap y los assets optimizados bajo `dist/`.
+The build generates the static pages, sitemap, and optimized assets in `dist/`.
 
-## Contenido y SEO
+## Content and SEO
 
-- Los metadatos principales se definen desde `src/i18n/ui.ts`.
-- El layout base usa `astro-seo` y JSON-LD de tipo `MedicalBusiness`.
-- El dominio canonico configurado es `https://precisembc.com`.
-- El sitemap incluye los locales `en-US` y `es-MX`.
+- Primary metadata is defined in `src/i18n/ui.ts`.
+- The base layout uses `astro-seo` and `MedicalBusiness` JSON-LD.
+- The canonical site URL is configured as `https://precisembc.com`.
+- The sitemap includes the `en-US` and `es-MX` locales.
 
-## Notas de mantenimiento
+## Maintenance Notes
 
-- Para cambiar textos del sitio, edita `src/i18n/ui.ts`.
-- Para agregar una nueva seccion, crea o actualiza componentes en `src/components/sections/`.
-- Para agregar una pagina localizada, crea la version correspondiente en `src/pages/en/` y `src/pages/es/`.
-- Verifica cambios con `npm run build` antes de publicar.
+- Update site copy in `src/i18n/ui.ts`.
+- Add or edit homepage sections in `src/components/sections/`.
+- Add localized pages in both `src/pages/en/` and `src/pages/es/`.
+- Run `npm run build` before publishing changes.
