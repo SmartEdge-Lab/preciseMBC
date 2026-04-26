@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Hero from '../../components/sections/Hero.astro';
+import TrustBar from '../../components/sections/TrustBar.astro';
+import Services from '../../components/sections/Services.astro';
+import ObgynSpecialty from '../../components/sections/ObgynSpecialty.astro';
+import WhyUs from '../../components/sections/WhyUs.astro';
+import Process from '../../components/sections/Process.astro';
+import Stats from '../../components/sections/Stats.astro';
+import Testimonials from '../../components/sections/Testimonials.astro';
+import PricingTeaser from '../../components/sections/PricingTeaser.astro';
+import FAQ from '../../components/sections/FAQ.astro';
+import Cta from '../../components/sections/Cta.astro';
+import ContactForm from '../../components/sections/ContactForm.astro';
+import WhatsAppFloat from '../../components/widgets/WhatsAppFloat.astro';
+import { useTranslations } from '../../i18n/utils';
+
+const lang = 'en';
+const t = useTranslations(lang);
+---
+
+<BaseLayout
+  title={t('meta.title')}
+  description={t('meta.description')}
+  lang={lang}
+>
+  <Header lang={lang} />
+  <main id="main-content">
+    <Hero lang={lang} />
+    <TrustBar lang={lang} />
+    <Services lang={lang} />
+    <ObgynSpecialty lang={lang} />
+    <WhyUs lang={lang} />
+    <Process lang={lang} />
+    <Stats lang={lang} />
+    <Testimonials lang={lang} />
+    <PricingTeaser lang={lang} />
+    <FAQ lang={lang} />
+    <Cta lang={lang} />
+    <ContactForm lang={lang} />
+  </main>
+  <Footer lang={lang} />
+  <WhatsAppFloat lang={lang} />
+</BaseLayout>

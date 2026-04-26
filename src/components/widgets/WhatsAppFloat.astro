@@ -1,0 +1,351 @@
+---
+import { Icon } from 'astro-icon/components';
+import { useTranslations } from '../../i18n/utils';
+import type { Lang } from '../../i18n/utils';
+
+interface Props {
+  lang: Lang;
+  phone?: string;
+}
+
+const { lang, phone = '13050000000' } = Astro.props;
+const t = useTranslations(lang);
+
+const copy = lang === 'es'
+  ? {
+      title: 'Asistente Precise MBC',
+      subtitle: 'Responde unas preguntas rápidas y te guiamos al próximo paso.',
+      open: 'Abrir chat',
+      close: 'Cerrar chat',
+      input: 'Escribe tu respuesta...',
+      send: 'Enviar',
+      restart: 'Empezar de nuevo',
+      whatsapp: 'Continuar por WhatsApp',
+      typing: 'Escribiendo...',
+      required: 'Para avanzar necesito una respuesta corta.',
+      steps: [
+        {
+          id: 'fit',
+          bot: 'Hola. Soy el asistente de Precise MBC. ¿Tu práctica es OBGYN en South Florida?',
+          type: 'choice',
+          options: ['Sí, OBGYN en South Florida', 'OBGYN fuera de South Florida', 'Otra especialidad'],
+        },
+        {
+          id: 'clinic',
+          bot: '¿Cuál es el nombre de la clínica o práctica?',
+          type: 'text',
+        },
+        {
+          id: 'providers',
+          bot: '¿Cuántos providers tienen actualmente?',
+          type: 'choice',
+          options: ['1 provider', '2-3 providers', '4-7 providers', '8+ providers'],
+        },
+        {
+          id: 'ehr',
+          bot: '¿Qué EHR o sistema usan para billing?',
+          type: 'choice',
+          options: ['Athena', 'eClinicalWorks', 'Kareo', 'DrChrono', 'Otro'],
+        },
+        {
+          id: 'challenge',
+          bot: '¿Qué te preocupa más ahora mismo del billing?',
+          type: 'choice',
+          options: ['Denials', 'A/R alto', 'Falta de seguimiento', 'Credentialing', 'Quiero cambiar de biller'],
+        },
+        {
+          id: 'contact',
+          bot: 'Déjame tu nombre y teléfono o email para que el equipo pueda responderte.',
+          type: 'text',
+        },
+      ],
+      done: 'Gracias. Con esto ya tenemos contexto suficiente para revisar si somos buen fit. Puedes continuar por WhatsApp y enviaremos el resumen automáticamente.',
+      summaryTitle: 'Resumen del lead',
+    }
+  : {
+      title: 'Precise MBC Assistant',
+      subtitle: 'Answer a few quick questions and we will guide you to the next step.',
+      open: 'Open chat',
+      close: 'Close chat',
+      input: 'Type your answer...',
+      send: 'Send',
+      restart: 'Start over',
+      whatsapp: 'Continue on WhatsApp',
+      typing: 'Typing...',
+      required: 'I need a short answer to continue.',
+      steps: [
+        {
+          id: 'fit',
+          bot: 'Hi. I am the Precise MBC assistant. Is your practice an OBGYN clinic in South Florida?',
+          type: 'choice',
+          options: ['Yes, OBGYN in South Florida', 'OBGYN outside South Florida', 'Another specialty'],
+        },
+        {
+          id: 'clinic',
+          bot: 'What is the name of your clinic or practice?',
+          type: 'text',
+        },
+        {
+          id: 'providers',
+          bot: 'How many providers do you currently have?',
+          type: 'choice',
+          options: ['1 provider', '2-3 providers', '4-7 providers', '8+ providers'],
+        },
+        {
+          id: 'ehr',
+          bot: 'Which EHR or billing system do you use?',
+          type: 'choice',
+          options: ['Athena', 'eClinicalWorks', 'Kareo', 'DrChrono', 'Other'],
+        },
+        {
+          id: 'challenge',
+          bot: 'What is your biggest billing concern right now?',
+          type: 'choice',
+          options: ['Denials', 'High A/R', 'Lack of follow-up', 'Credentialing', 'Looking to change biller'],
+        },
+        {
+          id: 'contact',
+          bot: 'Leave your name and phone or email so the team can follow up.',
+          type: 'text',
+        },
+      ],
+      done: 'Thanks. We have enough context to review fit. You can continue on WhatsApp and the summary will be included automatically.',
+      summaryTitle: 'Lead summary',
+    };
+
+const config = JSON.stringify({
+  phone,
+  whatsappMessage: t('whatsapp.message'),
+  copy,
+});
+---
+
+<div
+  id="lead-chat-widget"
+  class="fixed bottom-6 right-6 z-50"
+  data-config={config}
+>
+  <section
+    id="lead-chat-panel"
+    class="hidden mb-4 w-[calc(100vw-2rem)] max-w-sm overflow-hidden rounded-lg border border-slate-200 bg-white shadow-2xl"
+    aria-label={copy.title}
+  >
+    <header class="flex items-start justify-between gap-4 border-b border-slate-200 bg-burgundy-500 p-4 text-white">
+      <div>
+        <h2 class="font-display text-base font-semibold">{copy.title}</h2>
+        <p class="mt-1 text-xs leading-relaxed text-burgundy-100">{copy.subtitle}</p>
+      </div>
+      <button
+        type="button"
+        class="chat-close rounded-md p-1.5 text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+        aria-label={copy.close}
+      >
+        <Icon name="lucide:x" class="h-4 w-4" aria-hidden="true" />
+      </button>
+    </header>
+
+    <div id="lead-chat-log" class="max-h-[390px] space-y-3 overflow-y-auto bg-ivory-50 p-4" aria-live="polite"></div>
+
+    <div id="lead-chat-actions" class="border-t border-slate-200 bg-white p-3"></div>
+  </section>
+
+  <button
+    id="lead-chat-toggle"
+    type="button"
+    class="ml-auto flex h-14 w-14 items-center justify-center rounded-lg bg-green-600 text-white shadow-card transition-colors hover:bg-green-700"
+    aria-label={copy.open}
+    aria-expanded="false"
+    aria-controls="lead-chat-panel"
+  >
+    <Icon name="lucide:message-circle" class="h-7 w-7" aria-hidden="true" />
+  </button>
+</div>
+
+<script is:inline>
+  (() => {
+    const widget = document.getElementById('lead-chat-widget');
+    if (!widget) return;
+
+    const config = JSON.parse(widget.dataset.config || '{}');
+    const panel = document.getElementById('lead-chat-panel');
+    const toggle = document.getElementById('lead-chat-toggle');
+    const closeBtn = widget.querySelector('.chat-close');
+    const log = document.getElementById('lead-chat-log');
+    const actions = document.getElementById('lead-chat-actions');
+    const copy = config.copy;
+    const answers = {};
+    let currentStep = 0;
+    let started = false;
+
+    const labels = {
+      fit: copy.steps[0]?.bot,
+      clinic: copy.steps[1]?.bot,
+      providers: copy.steps[2]?.bot,
+      ehr: copy.steps[3]?.bot,
+      challenge: copy.steps[4]?.bot,
+      contact: copy.steps[5]?.bot,
+    };
+
+    function scrollToBottom() {
+      log.scrollTop = log.scrollHeight;
+    }
+
+    function addMessage(text, from = 'bot') {
+      const row = document.createElement('div');
+      row.className = from === 'user' ? 'flex justify-end' : 'flex justify-start';
+
+      const bubble = document.createElement('div');
+      bubble.className = from === 'user'
+        ? 'max-w-[82%] rounded-lg bg-dusty-rose-500 px-3 py-2 text-sm leading-relaxed text-white'
+        : 'max-w-[82%] rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm leading-relaxed text-slate-700 shadow-sm';
+      bubble.textContent = text;
+
+      row.appendChild(bubble);
+      log.appendChild(row);
+      scrollToBottom();
+    }
+
+    function clearActions() {
+      actions.replaceChildren();
+    }
+
+    function renderTextInput(step) {
+      clearActions();
+
+      const form = document.createElement('form');
+      form.className = 'flex gap-2';
+
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.name = step.id;
+      input.placeholder = copy.input;
+      input.autocomplete = step.id === 'contact' ? 'name' : 'off';
+      input.className = 'min-w-0 flex-1 rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-dusty-rose-500 focus:ring-2 focus:ring-sky-100';
+
+      const submit = document.createElement('button');
+      submit.type = 'submit';
+      submit.className = 'rounded-lg bg-burgundy-500 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-burgundy-600';
+      submit.textContent = copy.send;
+
+      form.append(input, submit);
+      actions.appendChild(form);
+      input.focus();
+
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const value = input.value.trim();
+        if (!value) {
+          addMessage(copy.required, 'bot');
+          return;
+        }
+        answer(step, value);
+      });
+    }
+
+    function renderChoices(step) {
+      clearActions();
+      const wrap = document.createElement('div');
+      wrap.className = 'flex flex-wrap gap-2';
+
+      step.options.forEach((option) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'rounded-lg border border-slate-200 bg-white px-3 py-2 text-left text-xs font-medium text-slate-700 transition-colors hover:border-dusty-rose-500 hover:bg-sky-50';
+        button.textContent = option;
+        button.addEventListener('click', () => answer(step, option));
+        wrap.appendChild(button);
+      });
+
+      actions.appendChild(wrap);
+    }
+
+    function askStep() {
+      const step = copy.steps[currentStep];
+      if (!step) {
+        finish();
+        return;
+      }
+
+      addMessage(step.bot, 'bot');
+
+      if (step.type === 'choice') {
+        renderChoices(step);
+      } else {
+        renderTextInput(step);
+      }
+    }
+
+    function answer(step, value) {
+      answers[step.id] = value;
+      addMessage(value, 'user');
+      currentStep += 1;
+      clearActions();
+      window.setTimeout(askStep, 350);
+    }
+
+    function buildSummary() {
+      const lines = Object.entries(answers).map(([key, value]) => {
+        const question = labels[key] || key;
+        return `${question}\n${value}`;
+      });
+
+      return `${config.whatsappMessage}\n\n${copy.summaryTitle}:\n${lines.join('\n\n')}`;
+    }
+
+    function finish() {
+      addMessage(copy.done, 'bot');
+      clearActions();
+
+      const wrap = document.createElement('div');
+      wrap.className = 'flex flex-col gap-2';
+
+      const whatsapp = document.createElement('a');
+      whatsapp.href = `https://wa.me/${config.phone}?text=${encodeURIComponent(buildSummary())}`;
+      whatsapp.target = '_blank';
+      whatsapp.rel = 'noopener noreferrer';
+      whatsapp.className = 'inline-flex items-center justify-center rounded-lg bg-green-600 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-green-700';
+      whatsapp.textContent = copy.whatsapp;
+
+      const restart = document.createElement('button');
+      restart.type = 'button';
+      restart.className = 'rounded-lg border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 transition-colors hover:border-dusty-rose-500';
+      restart.textContent = copy.restart;
+      restart.addEventListener('click', reset);
+
+      wrap.append(whatsapp, restart);
+      actions.appendChild(wrap);
+    }
+
+    function reset() {
+      Object.keys(answers).forEach((key) => delete answers[key]);
+      currentStep = 0;
+      log.replaceChildren();
+      clearActions();
+      askStep();
+    }
+
+    function openPanel() {
+      panel.classList.remove('hidden');
+      toggle.setAttribute('aria-expanded', 'true');
+      if (!started) {
+        started = true;
+        askStep();
+      }
+    }
+
+    function closePanel() {
+      panel.classList.add('hidden');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+
+    toggle.addEventListener('click', () => {
+      if (panel.classList.contains('hidden')) {
+        openPanel();
+      } else {
+        closePanel();
+      }
+    });
+
+    closeBtn?.addEventListener('click', closePanel);
+  })();
+</script>

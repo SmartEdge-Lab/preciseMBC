@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Container from '../../components/ui/Container.astro';
+
+const lang = 'en';
+---
+
+<BaseLayout
+  title="Terms of Service | Precise MBC"
+  description="Terms of service for Precise Medical Billing and Coding LLC."
+  lang={lang}
+>
+  <Header lang={lang} />
+  <main id="main-content" class="pt-32 pb-20">
+    <Container class="max-w-3xl">
+      <h1 class="font-display text-4xl font-bold text-burgundy-500 mb-8">Terms of Service</h1>
+      <div class="prose prose-gray max-w-none text-sm leading-relaxed space-y-6 text-gray-600">
+        <p class="text-xs text-gray-400">Last updated: January 1, 2025 — <em>This is a template. Consult a healthcare attorney before publishing.</em></p>
+
+        <h2 class="text-xl font-semibold text-gray-900 mt-8">1. Services</h2>
+        <p>Precise Medical Billing and Coding LLC provides medical billing, coding, and related revenue cycle management services. Specific terms, including fee structures and service scope, are defined in individual service agreements executed with each client.</p>
+
+        <h2 class="text-xl font-semibold text-gray-900 mt-8">2. HIPAA Business Associate</h2>
+        <p>By engaging our services, clients acknowledge that Precise MBC will serve as a Business Associate under HIPAA. A Business Associate Agreement (BAA) must be executed prior to the exchange of any Protected Health Information.</p>
+
+        <h2 class="text-xl font-semibold text-gray-900 mt-8">3. Client Responsibilities</h2>
+        <p>Clients are responsible for providing accurate and complete information required for billing, maintaining proper licensure, and complying with all applicable federal and state healthcare laws and regulations.</p>
+
+        <h2 class="text-xl font-semibold text-gray-900 mt-8">4. Limitation of Liability</h2>
+        <p>Precise MBC shall not be liable for claim denials resulting from incorrect or incomplete information provided by the client, changes in payer policies, or circumstances outside our control.</p>
+
+        <h2 class="text-xl font-semibold text-gray-900 mt-8">5. Contact</h2>
+        <p>For questions: <a href="mailto:info@precisembc.com" class="text-burgundy-500 hover:underline">info@precisembc.com</a></p>
+      </div>
+    </Container>
+  </main>
+  <Footer lang={lang} />
+</BaseLayout>

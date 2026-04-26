@@ -1,0 +1,39 @@
+---
+import Section from '../ui/Section.astro';
+import Container from '../ui/Container.astro';
+import { useTranslations } from '../../i18n/utils';
+import type { Lang } from '../../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const stats = ['1', '2', '3', '4'] as const;
+---
+
+<Section bg="burgundy">
+  <Container>
+    <h2 class="font-display text-3xl sm:text-4xl font-bold text-white text-center mb-12">
+      {t('stats.title')}
+    </h2>
+
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+      {stats.map(s => (
+        <div class="text-center group">
+          <div class="font-display text-5xl sm:text-6xl font-bold text-white mb-2 group-hover:scale-105 transition-transform duration-300">
+            {t(`stats.${s}.value` as any)}
+          </div>
+          <div class="text-lg font-semibold text-dusty-rose-300 mb-1">
+            {t(`stats.${s}.label` as any)}
+          </div>
+          <div class="text-sm text-burgundy-200">
+            {t(`stats.${s}.sub` as any)}
+          </div>
+        </div>
+      ))}
+    </div>
+  </Container>
+</Section>

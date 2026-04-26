@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Container from '../../components/ui/Container.astro';
+
+const lang = 'es';
+---
+
+<BaseLayout
+  title="Política de Privacidad | Precise MBC"
+  description="Política de privacidad de Precise Medical Billing and Coding LLC."
+  lang={lang}
+>
+  <Header lang={lang} />
+  <main id="main-content" class="pt-32 pb-20">
+    <Container class="max-w-3xl">
+      <h1 class="font-display text-4xl font-bold text-burgundy-500 mb-8">Política de Privacidad</h1>
+      <div class="prose prose-gray max-w-none text-sm leading-relaxed space-y-6 text-gray-600">
+        <p class="text-xs text-gray-400">Última actualización: 1 de enero de 2025 — <em>Esta es una plantilla. Consulte a un abogado de salud antes de publicar.</em></p>
+
+        <h2 class="text-xl font-semibold text-gray-900 mt-8">1. Información que recopilamos</h2>
+        <p>Precise Medical Billing and Coding LLC ("Precise MBC") recopila la información que usted proporciona directamente, como cuando completa nuestro formulario de contacto o solicita una consulta. Esto puede incluir su nombre, correo electrónico, número de teléfono e información del consultorio.</p>
+
+        <h2 class="text-xl font-semibold text-gray-900 mt-8">2. Cumplimiento HIPAA</h2>
+        <p>Como empresa de facturación médica, operamos como Asociado Comercial bajo HIPAA. Ejecutamos Acuerdos de Asociado Comercial (BAA) con todas las entidades cubiertas con las que trabajamos. La Información de Salud Protegida (PHI) se maneja en estricto cumplimiento con las Reglas de Privacidad y Seguridad de HIPAA.</p>
+
+        <h2 class="text-xl font-semibold text-gray-900 mt-8">3. Cómo usamos la información</h2>
+        <p>Usamos la información que recopilamos para responder consultas, proporcionar servicios de facturación, mejorar nuestro sitio web y comunicarnos con usted sobre nuestros servicios. No vendemos su información personal a terceros.</p>
+
+        <h2 class="text-xl font-semibold text-gray-900 mt-8">4. Seguridad de datos</h2>
+        <p>Implementamos salvaguardas administrativas, técnicas y físicas para proteger su información del acceso, uso o divulgación no autorizados.</p>
+
+        <h2 class="text-xl font-semibold text-gray-900 mt-8">5. Contáctenos</h2>
+        <p>Para preguntas de privacidad: <a href="mailto:info@precisembc.com" class="text-burgundy-500 hover:underline">info@precisembc.com</a></p>
+      </div>
+    </Container>
+  </main>
+  <Footer lang={lang} />
+</BaseLayout>

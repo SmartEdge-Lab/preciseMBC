@@ -1,0 +1,22 @@
+---
+interface Props {
+  variant?: 'burgundy' | 'rose' | 'champagne' | 'plum' | 'neutral';
+  class?: string;
+}
+
+const { variant = 'burgundy', class: className = '' } = Astro.props;
+
+const variants = {
+  burgundy: 'bg-burgundy-100 text-burgundy-700',
+  rose: 'bg-sky-100 text-dusty-rose-600',
+  champagne: 'bg-champagne-300/40 text-amber-800',
+  plum: 'bg-plum-100 text-plum-700',
+  neutral: 'bg-gray-100 text-gray-700',
+};
+
+const classes = `inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold tracking-wide uppercase rounded-md ${variants[variant]} ${className}`;
+---
+
+<span class={classes}>
+  <slot />
+</span>

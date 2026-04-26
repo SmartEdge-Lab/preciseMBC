@@ -1,0 +1,76 @@
+---
+import Section from '../ui/Section.astro';
+import Container from '../ui/Container.astro';
+import Badge from '../ui/Badge.astro';
+import { Icon } from 'astro-icon/components';
+import { useTranslations } from '../../i18n/utils';
+import type { Lang } from '../../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const services = [
+  {
+    num: '1',
+    icon: 'lucide:file-pen-line',
+    accent: 'text-burgundy-500 bg-burgundy-50 border-burgundy-100',
+  },
+  {
+    num: '2',
+    icon: 'lucide:send',
+    accent: 'text-dusty-rose-500 bg-sky-50 border-sky-100',
+  },
+  {
+    num: '3',
+    icon: 'lucide:circle-dollar-sign',
+    accent: 'text-plum-700 bg-plum-50 border-plum-100',
+  },
+  {
+    num: '4',
+    icon: 'lucide:trending-up',
+    accent: 'text-burgundy-500 bg-burgundy-50 border-burgundy-100',
+  },
+  {
+    num: '5',
+    icon: 'lucide:shield-alert',
+    accent: 'text-dusty-rose-500 bg-sky-50 border-sky-100',
+  },
+  {
+    num: '6',
+    icon: 'lucide:badge-check',
+    accent: 'text-plum-700 bg-plum-50 border-plum-100',
+  },
+];
+---
+
+<Section id="services" bg="ivory">
+  <Container>
+    <div class="text-center max-w-2xl mx-auto mb-12 lg:mb-16">
+      <Badge variant="burgundy" class="mb-4">{t('services.eyebrow')}</Badge>
+      <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-burgundy-500 mb-4">
+        {t('services.title')}
+      </h2>
+      <p class="text-lg text-gray-600">{t('services.subtitle')}</p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {services.map(({ num, icon, accent }) => (
+        <article class="group bg-white rounded-lg p-6 shadow-card transition-colors duration-200 border border-slate-200 hover:border-dusty-rose-500">
+          <div class={`w-12 h-12 rounded-lg border ${accent} flex items-center justify-center mb-5`}>
+            <Icon name={icon} class="w-6 h-6" aria-hidden="true" />
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">
+            {t(`services.${num}.title` as any)}
+          </h3>
+          <p class="text-sm text-gray-500 leading-relaxed">
+            {t(`services.${num}.desc` as any)}
+          </p>
+        </article>
+      ))}
+    </div>
+  </Container>
+</Section>

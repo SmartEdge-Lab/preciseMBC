@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://precisembc.com/sitemap-index.xml

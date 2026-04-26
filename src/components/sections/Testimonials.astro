@@ -1,0 +1,69 @@
+---
+import Section from '../ui/Section.astro';
+import Container from '../ui/Container.astro';
+import Badge from '../ui/Badge.astro';
+import { Icon } from 'astro-icon/components';
+import { useTranslations } from '../../i18n/utils';
+import type { Lang } from '../../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const testimonials = ['1', '2', '3'] as const;
+
+const initials = ['MC', 'JP', 'SR'];
+const colors = [
+  'bg-burgundy-500',
+  'bg-dusty-rose-500',
+  'bg-plum-700',
+];
+---
+
+<Section bg="ivory">
+  <Container>
+    <div class="text-center max-w-2xl mx-auto mb-12 lg:mb-16">
+      <Badge variant="burgundy" class="mb-4">{t('testimonials.eyebrow')}</Badge>
+      <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-burgundy-500">
+        {t('testimonials.title')}
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      {testimonials.map((num, i) => (
+        <blockquote class="bg-white rounded-lg p-6 shadow-card border border-slate-200 transition-colors duration-200 hover:border-dusty-rose-500 flex flex-col">
+
+          <!-- Stars -->
+          <div class="flex gap-1 mb-4" aria-label="5 out of 5 stars">
+            {Array.from({ length: 5 }).map(() => (
+              <Icon name="lucide:star" class="w-4 h-4 fill-champagne-400 text-champagne-400" aria-hidden="true" />
+            ))}
+          </div>
+
+          <!-- Quote -->
+          <p class="text-gray-600 text-sm leading-relaxed italic flex-1 mb-6">
+            {t(`testimonials.${num}.quote` as any)}
+          </p>
+
+          <!-- Author -->
+          <footer class="flex items-center gap-3">
+            <div class={`w-10 h-10 rounded-lg ${colors[i]} flex items-center justify-center text-white text-sm font-bold flex-shrink-0`} aria-hidden="true">
+              {initials[i]}
+            </div>
+            <div>
+              <cite class="text-sm font-semibold text-gray-900 not-italic">
+                {t(`testimonials.${num}.name` as any)}
+              </cite>
+              <p class="text-xs text-gray-400">
+                {t(`testimonials.${num}.role` as any)}
+              </p>
+            </div>
+          </footer>
+        </blockquote>
+      ))}
+    </div>
+  </Container>
+</Section>

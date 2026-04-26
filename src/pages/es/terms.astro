@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Container from '../../components/ui/Container.astro';
+
+const lang = 'es';
+---
+
+<BaseLayout
+  title="Términos de Servicio | Precise MBC"
+  description="Términos de servicio de Precise Medical Billing and Coding LLC."
+  lang={lang}
+>
+  <Header lang={lang} />
+  <main id="main-content" class="pt-32 pb-20">
+    <Container class="max-w-3xl">
+      <h1 class="font-display text-4xl font-bold text-burgundy-500 mb-8">Términos de Servicio</h1>
+      <div class="prose prose-gray max-w-none text-sm leading-relaxed space-y-6 text-gray-600">
+        <p class="text-xs text-gray-400">Última actualización: 1 de enero de 2025 — <em>Esta es una plantilla. Consulte a un abogado de salud antes de publicar.</em></p>
+
+        <h2 class="text-xl font-semibold text-gray-900 mt-8">1. Servicios</h2>
+        <p>Precise Medical Billing and Coding LLC proporciona facturación médica, codificación y servicios relacionados de gestión del ciclo de ingresos. Los términos específicos, incluidas las estructuras de tarifas y el alcance del servicio, se definen en acuerdos de servicio individuales ejecutados con cada cliente.</p>
+
+        <h2 class="text-xl font-semibold text-gray-900 mt-8">2. Asociado Comercial HIPAA</h2>
+        <p>Al contratar nuestros servicios, los clientes reconocen que Precise MBC actuará como Asociado Comercial bajo HIPAA. Debe ejecutarse un Acuerdo de Asociado Comercial (BAA) antes del intercambio de cualquier Información de Salud Protegida.</p>
+
+        <h2 class="text-xl font-semibold text-gray-900 mt-8">3. Responsabilidades del cliente</h2>
+        <p>Los clientes son responsables de proporcionar información precisa y completa requerida para la facturación, mantener la licencia adecuada y cumplir con todas las leyes y regulaciones de salud federales y estatales aplicables.</p>
+
+        <h2 class="text-xl font-semibold text-gray-900 mt-8">4. Limitación de responsabilidad</h2>
+        <p>Precise MBC no será responsable por rechazos de reclamaciones resultantes de información incorrecta o incompleta proporcionada por el cliente, cambios en las políticas del pagador o circunstancias fuera de nuestro control.</p>
+
+        <h2 class="text-xl font-semibold text-gray-900 mt-8">5. Contacto</h2>
+        <p>Para preguntas: <a href="mailto:info@precisembc.com" class="text-burgundy-500 hover:underline">info@precisembc.com</a></p>
+      </div>
+    </Container>
+  </main>
+  <Footer lang={lang} />
+</BaseLayout>

@@ -1,0 +1,109 @@
+---
+import { Icon } from 'astro-icon/components';
+import Container from '../ui/Container.astro';
+import Button from '../ui/Button.astro';
+import Badge from '../ui/Badge.astro';
+import { useTranslations } from '../../i18n/utils';
+import type { Lang } from '../../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const base = `/${lang}`;
+const waMessage = encodeURIComponent(t('whatsapp.message'));
+const heroStats = [
+  {
+    value: t('hero.stat1.value'),
+    label: t('hero.stat1.label'),
+    icon: 'lucide:circle-check',
+  },
+  {
+    value: t('hero.stat2.value'),
+    label: t('hero.stat2.label'),
+    icon: 'lucide:trending-down',
+  },
+  {
+    value: t('hero.stat3.value'),
+    label: t('hero.stat3.label'),
+    icon: 'lucide:clock-3',
+  },
+  {
+    value: t('hero.stat4.value'),
+    label: t('hero.stat4.label'),
+    icon: 'lucide:shield-check',
+  },
+];
+---
+
+<section class="relative pt-24 overflow-hidden bg-gradient-hero border-b border-slate-100">
+  <Container class="relative z-10">
+    <div class="grid lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] gap-10 lg:gap-12 xl:gap-16 items-start py-10 sm:py-14 lg:py-16">
+
+      <!-- Left: Copy -->
+      <div class="max-w-2xl">
+        <Badge variant="burgundy" class="mb-6">
+          <Icon name="lucide:map-pin-check" class="w-3.5 h-3.5" aria-hidden="true" />
+          {t('hero.eyebrow')}
+        </Badge>
+
+        <h1 class="max-w-[13ch] font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-burgundy-500 leading-tight mb-6">
+          {t('hero.title')}
+        </h1>
+
+        <p class="text-base sm:text-lg text-slate-600 leading-relaxed mb-8 max-w-[58ch]">
+          {t('hero.subtitle')}
+        </p>
+
+        <div class="flex flex-col sm:flex-row sm:flex-wrap gap-3 mb-8">
+          <Button href={`${base}#contact`} size="lg">
+            <Icon name="lucide:calendar-check" class="w-5 h-5" aria-hidden="true" />
+            {t('hero.cta.primary')}
+          </Button>
+
+          <Button
+            href={`https://wa.me/13050000000?text=${waMessage}`}
+            variant="outline"
+            size="lg"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={t('whatsapp.label')}
+          >
+            <Icon name="lucide:message-circle" class="w-5 h-5 text-plum-700" aria-hidden="true" />
+            {t('hero.cta.secondary')}
+          </Button>
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-4">
+        <div class="relative overflow-hidden rounded-lg border border-slate-200 bg-white shadow-card">
+          <picture>
+            <source srcset="/hero_img.png" media="(min-width: 1024px)" />
+            <img
+              src="/hero_img.png"
+              alt="Modern medical office workspace used by OBGYN practice teams"
+              class="aspect-[4/3] sm:aspect-[16/10] lg:aspect-[16/11] h-full w-full object-cover object-center"
+              loading="eager"
+              decoding="async"
+            />
+          </picture>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          {heroStats.map(stat => (
+            <div class="rounded-lg border border-slate-200 bg-white p-3 shadow-sm">
+              <div class="mb-2 flex items-center gap-2 text-dusty-rose-500">
+                <Icon name={stat.icon} class="h-4 w-4" aria-hidden="true" />
+                <div class="font-display text-2xl font-bold text-burgundy-500">{stat.value}</div>
+              </div>
+              <div class="text-xs font-medium leading-tight text-slate-600">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+  </Container>
+</section>

@@ -1,0 +1,63 @@
+---
+import Section from '../ui/Section.astro';
+import Container from '../ui/Container.astro';
+import Badge from '../ui/Badge.astro';
+import { Icon } from 'astro-icon/components';
+import { useTranslations } from '../../i18n/utils';
+import type { Lang } from '../../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const steps = ['1', '2', '3', '4'] as const;
+
+const stepIcons = [
+  'lucide:search-check',
+  'lucide:key-round',
+  'lucide:file-check-2',
+  'lucide:chart-column-increasing',
+];
+---
+
+<Section id="process" bg="ivory">
+  <Container>
+    <div class="text-center max-w-2xl mx-auto mb-12 lg:mb-16">
+      <Badge variant="rose" class="mb-4">{t('process.eyebrow')}</Badge>
+      <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-burgundy-500">
+        {t('process.title')}
+      </h2>
+    </div>
+
+    <div class="relative">
+      <!-- Connector line (desktop) -->
+      <div class="hidden lg:block absolute top-16 left-1/8 right-1/8 h-0.5 bg-gradient-to-r from-burgundy-200 via-dusty-rose-300 to-burgundy-200" aria-hidden="true"></div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        {steps.map((step, i) => (
+          <div class="relative flex flex-col items-center text-center">
+            <!-- Step number + icon -->
+            <div class="relative mb-6">
+              <div class="w-16 h-16 rounded-lg bg-white border border-slate-200 text-dusty-rose-500 flex items-center justify-center shadow-card">
+                <Icon name={stepIcons[i]} class="w-7 h-7" aria-hidden="true" />
+              </div>
+              <div class="absolute -top-2 -right-2 w-7 h-7 rounded-lg bg-burgundy-500 flex items-center justify-center text-[10px] font-bold text-white shadow-sm">
+                {t(`process.${step}.step` as any)}
+              </div>
+            </div>
+
+            <h3 class="text-base font-semibold text-gray-900 mb-3">
+              {t(`process.${step}.title` as any)}
+            </h3>
+            <p class="text-sm text-gray-500 leading-relaxed">
+              {t(`process.${step}.desc` as any)}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </Container>
+</Section>

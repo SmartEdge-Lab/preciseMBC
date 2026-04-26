@@ -1,0 +1,65 @@
+---
+import Section from '../ui/Section.astro';
+import Container from '../ui/Container.astro';
+import Badge from '../ui/Badge.astro';
+import { Icon } from 'astro-icon/components';
+import { useTranslations } from '../../i18n/utils';
+import type { Lang } from '../../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const items = [
+  {
+    num: '1',
+    icon: 'lucide:badge-check',
+    accent: 'bg-burgundy-50 text-burgundy-500 border-burgundy-100',
+  },
+  {
+    num: '2',
+    icon: 'lucide:chart-no-axes-combined',
+    accent: 'bg-plum-50 text-plum-700 border-plum-100',
+  },
+  {
+    num: '3',
+    icon: 'lucide:monitor-cog',
+    accent: 'bg-sky-50 text-dusty-rose-500 border-sky-100',
+  },
+  {
+    num: '4',
+    icon: 'lucide:map-pin-check',
+    accent: 'bg-amber-50 text-champagne-500 border-amber-100',
+  },
+] as const;
+---
+
+<Section bg="gradient">
+  <Container>
+    <div class="text-center max-w-2xl mx-auto mb-12 lg:mb-16">
+      <Badge variant="champagne" class="mb-4">{t('whyus.eyebrow')}</Badge>
+      <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-burgundy-500">
+        {t('whyus.title')}
+      </h2>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {items.map(({ num, icon, accent }) => (
+        <div class="bg-white rounded-lg p-6 shadow-card transition-colors duration-200 text-center border border-slate-200 hover:border-dusty-rose-500">
+          <div class={`w-14 h-14 ${accent} rounded-lg border flex items-center justify-center mx-auto mb-5`}>
+            <Icon name={icon} class="w-7 h-7" aria-hidden="true" />
+          </div>
+          <h3 class="text-base font-semibold text-gray-900 mb-3">
+            {t(`whyus.${num}.title` as any)}
+          </h3>
+          <p class="text-sm text-gray-500 leading-relaxed">
+            {t(`whyus.${num}.desc` as any)}
+          </p>
+        </div>
+      ))}
+    </div>
+  </Container>
+</Section>

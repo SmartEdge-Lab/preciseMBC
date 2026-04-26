@@ -1,0 +1,144 @@
+---
+import { SEO } from 'astro-seo';
+import { getAlternateLang, getLocalizedPath } from '../i18n/utils';
+import type { Lang } from '../i18n/utils';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  lang: Lang;
+  canonical?: string;
+  ogImage?: string;
+}
+
+const {
+  title,
+  description,
+  lang,
+  canonical = Astro.url.href,
+  ogImage = '/og-image.jpg',
+} = Astro.props;
+
+const alternateLang = getAlternateLang(lang);
+const alternateUrl = new URL(
+  `${getLocalizedPath(Astro.url.pathname, alternateLang)}${Astro.url.search}`,
+  Astro.site ?? Astro.url,
+).href;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'MedicalBusiness',
+  name: 'Precise MBC',
+  alternateName: 'Precise Medical Billing and Coding',
+  description: 'Specialized OBGYN medical billing and coding services in Miami, FL.',
+  url: 'https://precisembc.com',
+  telephone: '+13050000000',
+  email: 'info@precisembc.com',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Miami',
+    addressRegion: 'FL',
+    postalCode: '33101',
+    addressCountry: 'US',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 25.7617,
+    longitude: -80.1918,
+  },
+  areaServed: {
+    '@type': 'State',
+    name: 'Florida',
+  },
+  medicalSpecialty: 'Obstetrics',
+  priceRange: '$$',
+  openingHours: 'Mo-Fr 08:00-18:00',
+  sameAs: [
+    'https://www.linkedin.com/company/precise-mbc',
+  ],
+};
+---
+
+<!doctype html>
+<html lang={lang} class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <SEO
+      title={title}
+      description={description}
+      canonical={canonical}
+      openGraph={{
+        basic: {
+          title,
+          type: 'website',
+          image: ogImage,
+          url: canonical,
+        },
+        optional: {
+          description,
+          locale: lang === 'en' ? 'en_US' : 'es_MX',
+          siteName: 'Precise MBC',
+        },
+      }}
+      twitter={{
+        card: 'summary_large_image',
+        title,
+        description,
+        image: ogImage,
+      }}
+      extend={{
+        link: [
+          { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
+          { rel: 'alternate', hreflang: lang, href: canonical },
+          { rel: 'alternate', hreflang: alternateLang, href: alternateUrl },
+          { rel: 'alternate', hreflang: 'x-default', href: 'https://precisembc.com/en/' },
+          {
+            rel: 'preconnect',
+            href: 'https://fonts.googleapis.com',
+          },
+          {
+            rel: 'preconnect',
+            href: 'https://fonts.gstatic.com',
+            crossorigin: '',
+          },
+          {
+            rel: 'stylesheet',
+            href: 'https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Noto+Sans:wght@400;500;600;700&display=swap',
+          },
+        ],
+        meta: [
+          { name: 'robots', content: 'index, follow' },
+          { name: 'theme-color', content: '#1d4ed8' },
+        ],
+      }}
+    />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+
+  <body class="antialiased">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-burgundy-500 focus:text-white focus:rounded-lg">
+      Skip to main content
+    </a>
+
+    <slot />
+
+    <script is:inline>
+      // Header scroll effect
+      const header = document.getElementById('site-header');
+      if (header) {
+        window.addEventListener('scroll', () => {
+          if (window.scrollY > 20) {
+            header.classList.add('scrolled');
+          } else {
+            header.classList.remove('scrolled');
+          }
+        }, { passive: true });
+      }
+    </script>
+  </body>
+</html>

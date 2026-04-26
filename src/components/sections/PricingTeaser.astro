@@ -1,0 +1,95 @@
+---
+import Section from '../ui/Section.astro';
+import Container from '../ui/Container.astro';
+import Badge from '../ui/Badge.astro';
+import Button from '../ui/Button.astro';
+import { Icon } from 'astro-icon/components';
+import { useTranslations } from '../../i18n/utils';
+import type { Lang } from '../../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const base = `/${lang}`;
+
+const plans = [
+  {
+    num: '1',
+    featured: false,
+    features: ['1', '2', '3', '4'],
+  },
+  {
+    num: '2',
+    featured: true,
+    features: ['1', '2', '3', '4', '5'],
+  },
+  {
+    num: '3',
+    featured: false,
+    features: ['1', '2', '3', '4', '5'],
+  },
+] as const;
+---
+
+<Section bg="white">
+  <Container>
+    <div class="text-center max-w-2xl mx-auto mb-12 lg:mb-16">
+      <Badge variant="plum" class="mb-4">{t('pricing.eyebrow')}</Badge>
+      <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-burgundy-500 mb-4">
+        {t('pricing.title')}
+      </h2>
+      <p class="text-lg text-gray-600">{t('pricing.subtitle')}</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6 items-center">
+      {plans.map(({ num, featured, features }) => (
+        <div class={`relative rounded-lg p-8 transition-colors duration-200 ${
+          featured
+            ? 'bg-burgundy-500 text-white shadow-card md:scale-[1.02]'
+            : 'bg-white border border-slate-200 shadow-card hover:border-dusty-rose-500'
+        }`}>
+          {featured && (
+            <div class="absolute -top-4 left-1/2 -translate-x-1/2">
+              <span class="px-4 py-1.5 text-xs font-bold tracking-wide uppercase rounded-md bg-champagne-400 text-gray-900 shadow-md">
+                {t(`pricing.${num}.badge` as any)}
+              </span>
+            </div>
+          )}
+
+          <div class="mb-6">
+            <h3 class={`text-xl font-bold mb-2 ${featured ? 'text-white' : 'text-gray-900'}`}>
+              {t(`pricing.${num}.name` as any)}
+            </h3>
+            <p class={`text-sm leading-relaxed ${featured ? 'text-burgundy-200' : 'text-gray-500'}`}>
+              {t(`pricing.${num}.desc` as any)}
+            </p>
+          </div>
+
+          <ul class="space-y-3 mb-8">
+            {features.map(f => (
+              <li class="flex items-start gap-2.5">
+                <Icon name="lucide:check" class={`w-4 h-4 mt-0.5 flex-shrink-0 ${featured ? 'text-champagne-400' : 'text-dusty-rose-500'}`} aria-hidden="true" />
+                <span class={`text-sm ${featured ? 'text-white' : 'text-gray-600'}`}>
+                  {t(`pricing.${num}.feature${f}` as any)}
+                </span>
+              </li>
+            ))}
+          </ul>
+
+          <Button
+            href={`${base}#contact`}
+            variant={featured ? 'secondary' : 'outline'}
+            class={`w-full justify-center ${featured ? '!bg-white !text-burgundy-500 hover:!bg-ivory-50' : ''}`}
+          >
+            {t(`pricing.${num}.cta` as any)}
+          </Button>
+        </div>
+      ))}
+    </div>
+
+    <p class="text-center text-xs text-gray-400 mt-8">{t('pricing.note')}</p>
+  </Container>
+</Section>

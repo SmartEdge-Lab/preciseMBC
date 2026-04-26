@@ -1,0 +1,23 @@
+---
+import { Icon } from 'astro-icon/components';
+import { languages, getAlternateLang, getLocalizedPath } from '../../i18n/utils';
+import type { Lang } from '../../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const alternateLang = getAlternateLang(lang);
+const alternateLabel = languages[alternateLang];
+const alternatePath = `${getLocalizedPath(Astro.url.pathname, alternateLang)}${Astro.url.search}`;
+---
+
+<a
+  href={alternatePath}
+  class="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-burgundy-600 hover:text-burgundy-800 border border-burgundy-200 hover:border-burgundy-400 rounded-full transition-all duration-150 bg-white/60 hover:bg-burgundy-50"
+  aria-label={`Switch to ${alternateLabel}`}
+>
+  <Icon name="lucide:languages" class="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
+  <span>{alternateLabel}</span>
+</a>
