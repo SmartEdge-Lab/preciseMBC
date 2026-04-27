@@ -13,7 +13,6 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = useTranslations(lang);
-const web3formsKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? '';
 ---
 
 <Section id="contact" bg="white">
@@ -32,17 +31,23 @@ const web3formsKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? '';
       <div class="bg-white rounded-lg border border-slate-200 shadow-card p-6 sm:p-8">
         <form
           id="contact-form"
+          name="practice-inquiry"
           method="POST"
-          action="https://api.web3forms.com/submit"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
           class="space-y-5"
-          novalidate
           aria-label={t('contact.title')}
         >
-          <input type="hidden" name="access_key" value={web3formsKey} />
-          <input type="hidden" name="subject" value="New OBGYN Billing Inquiry - Precise MBC" />
-          <input type="hidden" name="redirect" value="false" />
+          <input type="hidden" name="form-name" value="practice-inquiry" />
+          <input type="hidden" name="source" value="contact_section" />
+          <input type="hidden" name="language" value={lang} />
           <!-- Honeypot -->
-          <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" aria-hidden="true" />
+          <p class="hidden">
+            <label>
+              Do not fill this out if you are human:
+              <input name="bot-field" tabindex="-1" autocomplete="off" />
+            </label>
+          </p>
 
           <div class="grid sm:grid-cols-2 gap-5">
             <!-- Name -->
@@ -249,14 +254,15 @@ const web3formsKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? '';
     errorMsg?.classList.add('hidden');
 
     try {
-      const res = await fetch('https://api.web3forms.com/submit', {
+      const res = await fetch('/', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(Object.fromEntries(new FormData(form))),
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(
+          Array.from(new FormData(form), ([key, value]) => [key, String(value)]),
+        ),
       });
-      const json = await res.json();
 
-      if (res.ok && json.success) {
+      if (res.ok) {
         form.reset();
         successMsg?.classList.remove('hidden');
       } else {

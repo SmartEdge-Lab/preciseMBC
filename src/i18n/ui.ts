@@ -237,9 +237,14 @@ export const ui = {
     'cta.subtitle':
       'Tell us about your practice and current billing setup. We will let you know whether we are a good fit and how our pricing model works.',
     'cta.cta': 'Start the Conversation',
+    'cta.form.label': 'Quick lead form',
     'cta.input.placeholder': 'Your clinic email address',
     'cta.clinic.placeholder': 'Practice or clinic name',
+    'cta.validation.clinic': 'Enter your practice or clinic name.',
+    'cta.validation.email': 'Enter a valid work email address.',
+    'cta.sending': 'Sending...',
     'cta.sent': 'Thank you! We will reach out within 1 business day.',
+    'cta.error': 'Something went wrong. Please email us directly or try again.',
 
     // Contact Form
     'contact.eyebrow': 'Get In Touch',
@@ -515,9 +520,14 @@ export const ui = {
     'cta.subtitle':
       'Cuéntenos cómo funciona hoy su clínica y su billing. Le diremos si somos un buen fit y cómo operamos con nuestro modelo de precios.',
     'cta.cta': 'Iniciar la Conversación',
+    'cta.form.label': 'Formulario rápido de lead',
     'cta.input.placeholder': 'Su correo electrónico de trabajo',
     'cta.clinic.placeholder': 'Nombre del consultorio o clínica',
+    'cta.validation.clinic': 'Ingrese el nombre del consultorio o clínica.',
+    'cta.validation.email': 'Ingrese un correo de trabajo válido.',
+    'cta.sending': 'Enviando...',
     'cta.sent': '¡Gracias! Nos pondremos en contacto en 1 día hábil.',
+    'cta.error': 'Algo salió mal. Envíenos un correo directamente o intente de nuevo.',
 
     // Contact Form
     'contact.eyebrow': 'Contáctenos',
