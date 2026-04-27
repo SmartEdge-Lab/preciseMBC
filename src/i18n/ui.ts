@@ -262,8 +262,9 @@ export const ui = {
     'contact.calendly.title': 'Schedule a Practice Call',
     'contact.calendly.blurb': 'Choose a time to discuss your clinic and current billing setup',
     'contact.calendly.cta': 'Open Calendar',
-    'contact.info.phone': '+1 (305) 000-0000',
-    'contact.info.email': 'info@precisembc.com',
+    'contact.info.phone': '+1 (786) 535-7256',
+    'contact.info.fax': '+1 (754) 732-4242',
+    'contact.info.email': 'Admin@precisembc.com',
     'contact.info.address': 'Miami, FL 33101',
 
     // Footer
@@ -539,8 +540,9 @@ export const ui = {
     'contact.calendly.title': 'Agende una Llamada',
     'contact.calendly.blurb': 'Elija un horario para conversar sobre su clínica y su operación actual de billing',
     'contact.calendly.cta': 'Abrir Calendario',
-    'contact.info.phone': '+1 (305) 000-0000',
-    'contact.info.email': 'info@precisembc.com',
+    'contact.info.phone': '+1 (786) 535-7256',
+    'contact.info.fax': '+1 (754) 732-4242',
+    'contact.info.email': 'Admin@precisembc.com',
     'contact.info.address': 'Miami, FL 33101',
 
     // Footer
