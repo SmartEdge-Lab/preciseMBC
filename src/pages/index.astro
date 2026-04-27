@@ -51,6 +51,26 @@ const defaultLocalePath = '/en/';
         </p>
       </section>
     </main>
+    <form name="quick-lead" method="POST" action="/" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="quick-lead" />
+      <input type="hidden" name="source" value="homepage_cta" />
+      <input type="hidden" name="language" value="en" />
+      <input name="clinic" type="text" />
+      <input name="email" type="email" />
+      <input name="bot-field" />
+    </form>
+    <form name="practice-inquiry" method="POST" action="/" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="practice-inquiry" />
+      <input type="hidden" name="source" value="contact_section" />
+      <input type="hidden" name="language" value="en" />
+      <input name="name" type="text" />
+      <input name="email" type="email" />
+      <input name="phone" type="tel" />
+      <input name="clinic" type="text" />
+      <input name="ehr" type="text" />
+      <textarea name="message"></textarea>
+      <input name="bot-field" />
+    </form>
   </body>
 </html>
 
