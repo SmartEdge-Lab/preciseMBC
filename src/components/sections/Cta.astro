@@ -50,10 +50,15 @@ const t = useTranslations(lang);
               id={`cta-clinic-${lang}`}
               name="clinic"
               type="text"
+              required
               autocomplete="organization"
               placeholder={t('cta.clinic.placeholder')}
+              aria-describedby={`cta-clinic-error-${lang}`}
               class="w-full px-4 py-3 rounded-lg bg-white text-burgundy-500 placeholder-slate-400 border border-white/20 focus:outline-none focus:border-dusty-rose-500 focus:ring-2 focus:ring-sky-200 transition-all duration-200 text-sm"
             />
+            <p id={`cta-clinic-error-${lang}`} data-error-for="clinic" class="cta-field-error hidden mt-1.5 text-xs font-medium text-champagne-300">
+              {t('cta.validation.clinic')}
+            </p>
           </div>
 
           <div class="grid gap-3 sm:grid-cols-[minmax(0,1fr)_auto]">
@@ -66,8 +71,12 @@ const t = useTranslations(lang);
                 required
                 autocomplete="email"
                 placeholder={t('cta.input.placeholder')}
+                aria-describedby={`cta-email-error-${lang}`}
                 class="w-full px-4 py-3 rounded-lg bg-white text-burgundy-500 placeholder-slate-400 border border-white/20 focus:outline-none focus:border-dusty-rose-500 focus:ring-2 focus:ring-sky-200 transition-all duration-200 text-sm"
               />
+              <p id={`cta-email-error-${lang}`} data-error-for="email" class="cta-field-error hidden mt-1.5 text-xs font-medium text-champagne-300">
+                {t('cta.validation.email')}
+              </p>
             </div>
             <button
               id="cta-submit"
@@ -96,10 +105,45 @@ const t = useTranslations(lang);
   const success = document.getElementById('cta-success');
   const error = document.getElementById('cta-error');
   const submit = document.getElementById('cta-submit') as HTMLButtonElement | null;
+  const clinicInput = form?.querySelector<HTMLInputElement>('input[name="clinic"]');
+  const emailInput = form?.querySelector<HTMLInputElement>('input[name="email"]');
+  const clinicError = form?.querySelector<HTMLElement>('[data-error-for="clinic"]');
+  const emailError = form?.querySelector<HTMLElement>('[data-error-for="email"]');
+
+  const setInvalid = (
+    input: HTMLInputElement | undefined | null,
+    message: HTMLElement | undefined | null,
+    invalid: boolean,
+  ) => {
+    input?.setAttribute('aria-invalid', String(invalid));
+    input?.classList.toggle('border-dusty-rose-500', invalid);
+    input?.classList.toggle('ring-2', invalid);
+    input?.classList.toggle('ring-champagne-300', invalid);
+    message?.classList.toggle('hidden', !invalid);
+  };
+
+  const validateQuickLead = () => {
+    const clinicInvalid = !clinicInput?.value.trim();
+    const emailInvalid = !emailInput?.validity.valid;
+
+    setInvalid(clinicInput, clinicError, clinicInvalid);
+    setInvalid(emailInput, emailError, emailInvalid);
+
+    return !clinicInvalid && !emailInvalid;
+  };
+
+  [clinicInput, emailInput].forEach((input) => {
+    input?.addEventListener('input', () => {
+      if (input.getAttribute('aria-invalid') === 'true') {
+        validateQuickLead();
+      }
+    });
+  });
 
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (!submit) return;
+    if (!validateQuickLead()) return;
 
     const defaultLabel = submit.textContent ?? '';
     submit.disabled = true;
