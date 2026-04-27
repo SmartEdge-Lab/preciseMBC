@@ -233,13 +233,17 @@ export const ui = {
       'Yes. We operate with full HIPAA compliance — signed BAAs, encrypted data transmission, role-based access controls, and regular security audits. PHI protection is non-negotiable.',
 
     // CTA
+    'cta.eyebrow': 'Quick Lead Capture',
     'cta.title': 'Looking for a Better Billing Partner?',
     'cta.subtitle':
       'Tell us about your practice and current billing setup. We will let you know whether we are a good fit and how our pricing model works.',
     'cta.cta': 'Start the Conversation',
+    'cta.form.label': 'Quick lead form',
     'cta.input.placeholder': 'Your clinic email address',
     'cta.clinic.placeholder': 'Practice or clinic name',
+    'cta.sending': 'Sending...',
     'cta.sent': 'Thank you! We will reach out within 1 business day.',
+    'cta.error': 'Something went wrong. Please email us directly or try again.',
 
     // Contact Form
     'contact.eyebrow': 'Get In Touch',
@@ -511,13 +515,17 @@ export const ui = {
       'Sí. Operamos con total cumplimiento de HIPAA — BAAs firmados, transmisión de datos cifrada, controles de acceso basados en roles y auditorías de seguridad regulares. La protección de PHI no es negociable.',
 
     // CTA
+    'cta.eyebrow': 'Captura Rápida',
     'cta.title': '¿Buscan un Mejor Partner de Billing?',
     'cta.subtitle':
       'Cuéntenos cómo funciona hoy su clínica y su billing. Le diremos si somos un buen fit y cómo operamos con nuestro modelo de precios.',
     'cta.cta': 'Iniciar la Conversación',
+    'cta.form.label': 'Formulario rápido de lead',
     'cta.input.placeholder': 'Su correo electrónico de trabajo',
     'cta.clinic.placeholder': 'Nombre del consultorio o clínica',
+    'cta.sending': 'Enviando...',
     'cta.sent': '¡Gracias! Nos pondremos en contacto en 1 día hábil.',
+    'cta.error': 'Algo salió mal. Envíenos un correo directamente o intente de nuevo.',
 
     // Contact Form
     'contact.eyebrow': 'Contáctenos',
