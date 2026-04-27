@@ -265,7 +265,7 @@ export const ui = {
     'contact.info.phone': '+1 (786) 535-7256',
     'contact.info.fax': '+1 (754) 732-4242',
     'contact.info.email': 'Admin@precisembc.com',
-    'contact.info.address': 'Miami, FL 33101',
+    'contact.info.address': 'Miami, FL 33013',
 
     // Footer
     'footer.tagline': 'Specialized OBGYN medical billing for South Florida practices that need a dependable long-term revenue cycle partner.',
@@ -543,7 +543,7 @@ export const ui = {
     'contact.info.phone': '+1 (786) 535-7256',
     'contact.info.fax': '+1 (754) 732-4242',
     'contact.info.email': 'Admin@precisembc.com',
-    'contact.info.address': 'Miami, FL 33101',
+    'contact.info.address': 'Miami, FL 33013',
 
     // Footer
     'footer.tagline': 'Facturación médica especializada para consultorios OBGYN del sur de Florida que necesitan un socio confiable de revenue cycle.',
