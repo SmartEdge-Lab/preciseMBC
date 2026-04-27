@@ -12,32 +12,33 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 
 const badges = [
-  { key: 'trust.hipaa', icon: 'lucide:shield-check', color: 'green' },
-  { key: 'trust.aapc', icon: 'lucide:award', color: 'burgundy' },
-  { key: 'trust.ahima', icon: 'lucide:bookmark-check', color: 'plum' },
-  { key: 'trust.icd10', icon: 'lucide:code-xml', color: 'rose' },
-  { key: 'trust.obgyn', icon: 'lucide:heart-pulse', color: 'champagne' },
+  { title: 'trust.privacy.title', desc: 'trust.privacy.desc', icon: 'lucide:shield-check', color: 'green' },
+  { title: 'trust.coding.title', desc: 'trust.coding.desc', icon: 'lucide:badge-check', color: 'burgundy' },
+  { title: 'trust.obgyn.title', desc: 'trust.obgyn.desc', icon: 'lucide:heart-pulse', color: 'plum' },
+  { title: 'trust.claims.title', desc: 'trust.claims.desc', icon: 'lucide:file-check-2', color: 'rose' },
 ] as const;
 ---
 
-<div class="border-y border-burgundy-100 bg-white py-8">
+<div class="border-y border-burgundy-100 bg-white py-10">
   <Container>
-    <p class="text-center text-xs font-semibold tracking-widest uppercase text-gray-400 mb-6">
+    <p class="text-center text-xs font-semibold tracking-widest uppercase text-gray-400 mb-7">
       {t('trust.title')}
     </p>
-    <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-8">
-      {badges.map(({ key, icon, color }) => (
-        <div class="flex items-center gap-2 text-sm font-medium text-gray-600">
-          <div class={`w-7 h-7 rounded-lg flex items-center justify-center ${
+    <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      {badges.map(({ title, desc, icon, color }) => (
+        <div class="flex items-start gap-3 rounded-lg border border-slate-200 bg-ivory-50 px-4 py-3">
+          <div class={`mt-0.5 w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${
             color === 'green' ? 'bg-green-100 text-green-600' :
             color === 'burgundy' ? 'bg-burgundy-100 text-burgundy-600' :
             color === 'plum' ? 'bg-plum-100 text-plum-700' :
-            color === 'rose' ? 'bg-red-100 text-dusty-rose-500' :
-            'bg-champagne-300/40 text-amber-700'
+            'bg-red-100 text-dusty-rose-500'
           }`}>
             <Icon name={icon} class="w-4 h-4" aria-hidden="true" />
           </div>
-          <span>{t(key as any)}</span>
+          <div>
+            <div class="text-sm font-semibold text-burgundy-500">{t(title as any)}</div>
+            <p class="mt-0.5 text-xs leading-relaxed text-slate-500">{t(desc as any)}</p>
+          </div>
         </div>
       ))}
     </div>

@@ -171,7 +171,7 @@ const t = useTranslations(lang);
         </form>
       </div>
 
-      <!-- Right: Calendly + contact info -->
+      <!-- Right: contact info -->
       <div class="space-y-6">
         <!-- Contact quick info -->
         <div class="bg-ivory-50 rounded-lg p-6 border border-burgundy-100">
@@ -200,36 +200,6 @@ const t = useTranslations(lang);
                 <Icon name="lucide:map-pin" class="w-4 h-4 text-burgundy-600" aria-hidden="true" />
               </div>
               {t('contact.info.address')}
-            </div>
-          </div>
-        </div>
-
-        <!-- Calendly placeholder -->
-        <div class="bg-white rounded-lg border border-slate-200 shadow-card overflow-hidden">
-          <div class="p-6 border-b border-gray-50">
-            <h3 class="text-base font-semibold text-gray-900">{t('contact.calendly.title')}</h3>
-          </div>
-          <div class="p-6">
-            <!-- Calendly inline widget placeholder -->
-            <div
-              class="calendly-inline-widget min-h-80 flex items-center justify-center bg-ivory-50 rounded-lg border-2 border-dashed border-burgundy-200"
-              data-url="https://calendly.com/precisembc/consultation"
-              style="min-width:280px"
-            >
-              <div class="text-center p-6">
-                <div class="w-12 h-12 bg-burgundy-100 rounded-lg flex items-center justify-center mx-auto mb-3">
-                  <Icon name="lucide:calendar-check" class="w-6 h-6 text-burgundy-600" aria-hidden="true" />
-                </div>
-                <p class="text-sm text-gray-500 mb-4">{t('contact.calendly.blurb')}</p>
-                <a
-                  href="https://calendly.com/precisembc/consultation"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="inline-flex items-center gap-2 px-5 py-2.5 bg-burgundy-500 text-white text-sm font-semibold rounded-lg hover:bg-burgundy-600 transition-colors"
-                >
-                  {t('contact.calendly.cta')}
-                </a>
-              </div>
             </div>
           </div>
         </div>
