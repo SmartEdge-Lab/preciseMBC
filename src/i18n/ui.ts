@@ -34,15 +34,18 @@ export const ui = {
     'hero.stat3.value': '24h',
     'hero.stat3.label': 'Claim Turnaround',
     'hero.stat4.value': '100%',
-    'hero.stat4.label': 'HIPAA Compliant',
+    'hero.stat4.label': 'Privacy-Ready',
 
     // Trust Bar
     'trust.title': 'Trusted by OBGYN Practices Across South Florida',
-    'trust.hipaa': 'HIPAA Compliant',
-    'trust.aapc': 'AAPC Certified Coders',
-    'trust.ahima': 'AHIMA Member',
-    'trust.icd10': 'ICD-10 Experts',
-    'trust.obgyn': 'OBGYN Specialists',
+    'trust.privacy.title': 'Privacy-Minded Workflows',
+    'trust.privacy.desc': 'Processes designed around secure handling of billing and patient data.',
+    'trust.coding.title': 'Certified Coding Background',
+    'trust.coding.desc': 'Credentialed billing and coding experience to support cleaner claims.',
+    'trust.obgyn.title': 'OBGYN Billing Focus',
+    'trust.obgyn.desc': 'Focused on obstetric and gynecological revenue cycle details.',
+    'trust.claims.title': 'Claim Follow-Up Discipline',
+    'trust.claims.desc': 'Structured attention to denials, aging A/R, and payer follow-up.',
 
     // Services
     'services.eyebrow': 'What We Do',
@@ -154,7 +157,7 @@ export const ui = {
     'stats.3.label': 'Claim Turnaround',
     'stats.3.sub': 'Same-day charge entry',
     'stats.4.value': '100%',
-    'stats.4.label': 'HIPAA Compliance',
+    'stats.4.label': 'Privacy Controls',
     'stats.4.sub': 'Processes built around secure handling',
 
     // Testimonials
@@ -224,7 +227,7 @@ export const ui = {
       'Yes. We can support credentialing as part of the relationship or as an added scope depending on the practice and plan.',
     'faq.6.q': 'Are your coders OBGYN specialists?',
     'faq.6.a':
-      'Absolutely. All our medical coders hold AAPC or AHIMA certifications with dedicated OBGYN specialization. They have extensive experience with obstetric global packages, gynecological procedures, and South Florida payer requirements.',
+      'Yes. Our billing and coding work is led by credentialed experience with dedicated OBGYN focus. We understand obstetric global packages, gynecological procedures, and South Florida payer requirements.',
     'faq.7.q': 'What happens to my denied claims?',
     'faq.7.a':
       'We review denials, determine root causes, submit corrected claims or appeals when appropriate, and look for patterns that need operational attention.',
@@ -314,15 +317,18 @@ export const ui = {
     'hero.stat3.value': '24h',
     'hero.stat3.label': 'Gestión de Reclamaciones',
     'hero.stat4.value': '100%',
-    'hero.stat4.label': 'Cumplimiento HIPAA',
+    'hero.stat4.label': 'Privacidad Segura',
 
     // Trust Bar
     'trust.title': 'Consultorios OBGYN del Sur de Florida Confían en Precise MBC',
-    'trust.hipaa': 'Cumple con HIPAA',
-    'trust.aapc': 'Codificadores Certificados AAPC',
-    'trust.ahima': 'Miembro AHIMA',
-    'trust.icd10': 'Expertos en ICD-10',
-    'trust.obgyn': 'Especialistas OBGYN',
+    'trust.privacy.title': 'Procesos Enfocados en Privacidad',
+    'trust.privacy.desc': 'Flujos diseñados para manejar datos de billing y pacientes de forma segura.',
+    'trust.coding.title': 'Experiencia Certificada en Coding',
+    'trust.coding.desc': 'Experiencia acreditada en billing y coding para apoyar claims más limpios.',
+    'trust.obgyn.title': 'Enfoque en Billing OBGYN',
+    'trust.obgyn.desc': 'Atención a los detalles de revenue cycle en obstetricia y ginecología.',
+    'trust.claims.title': 'Disciplina en Seguimiento',
+    'trust.claims.desc': 'Trabajo estructurado sobre rechazos, A/R aging y seguimiento con payers.',
 
     // Services
     'services.eyebrow': 'Nuestros Servicios',
@@ -434,7 +440,7 @@ export const ui = {
     'stats.3.label': 'Tiempo de Procesamiento',
     'stats.3.sub': 'Ingreso de cargos el mismo día',
     'stats.4.value': '100%',
-    'stats.4.label': 'Cumplimiento HIPAA',
+    'stats.4.label': 'Controles de Privacidad',
     'stats.4.sub': 'Procesos orientados a manejo seguro',
 
     // Testimonials
@@ -504,7 +510,7 @@ export const ui = {
       'Sí. Podemos apoyar procesos de acreditación como parte de la relación o como alcance adicional, según la clínica y el plan.',
     'faq.6.q': '¿Sus codificadores son especialistas en OBGYN?',
     'faq.6.a':
-      'Absolutamente. Todos nuestros codificadores médicos tienen certificaciones AAPC o AHIMA con especialización dedicada en OBGYN. Tienen amplia experiencia con paquetes obstétricos globales, procedimientos ginecológicos y requisitos de los pagadores del sur de Florida.',
+      'Sí. Nuestro trabajo de billing y coding está respaldado por experiencia acreditada con enfoque en OBGYN. Entendemos paquetes obstétricos globales, procedimientos ginecológicos y requisitos de payers del sur de Florida.',
     'faq.7.q': '¿Qué pasa con mis reclamaciones rechazadas?',
     'faq.7.a':
       'Revisamos los rechazos, identificamos causas, enviamos claims corregidos o apelaciones cuando aplica y buscamos patrones que deben corregirse en la operación.',
