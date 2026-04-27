@@ -233,7 +233,6 @@ export const ui = {
       'Yes. We operate with full HIPAA compliance — signed BAAs, encrypted data transmission, role-based access controls, and regular security audits. PHI protection is non-negotiable.',
 
     // CTA
-    'cta.eyebrow': 'Practice Review',
     'cta.title': 'Looking for a Better Billing Partner?',
     'cta.subtitle':
       'Tell us about your practice and current billing setup. We will let you know whether we are a good fit and how our pricing model works.',
@@ -515,7 +514,6 @@ export const ui = {
       'Sí. Operamos con total cumplimiento de HIPAA — BAAs firmados, transmisión de datos cifrada, controles de acceso basados en roles y auditorías de seguridad regulares. La protección de PHI no es negociable.',
 
     // CTA
-    'cta.eyebrow': 'Revisión de la Clínica',
     'cta.title': '¿Buscan un Mejor Partner de Billing?',
     'cta.subtitle':
       'Cuéntenos cómo funciona hoy su clínica y su billing. Le diremos si somos un buen fit y cómo operamos con nuestro modelo de precios.',
