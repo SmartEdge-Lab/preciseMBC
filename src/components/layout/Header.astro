@@ -2,6 +2,8 @@
 import Container from '../ui/Container.astro';
 import Button from '../ui/Button.astro';
 import LanguageSwitcher from './LanguageSwitcher.astro';
+import ThemeToggle from './ThemeToggle.astro';
+import ThemeLogo from '../ui/ThemeLogo.astro';
 import { Icon } from 'astro-icon/components';
 import { useTranslations } from '../../i18n/utils';
 import type { Lang } from '../../i18n/utils';
@@ -25,9 +27,14 @@ const base = `/${lang}`;
 
         <!-- Logo -->
         <a href={base} class="flex items-center gap-3 group" aria-label="Precise MBC – Home">
-          <div class="w-9 h-9 rounded-lg bg-burgundy-500 flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
-            <Icon name="lucide:file-check-2" class="w-5 h-5 text-white" aria-hidden="true" />
-          </div>
+          <ThemeLogo
+            alt="Precise MBC logo"
+            width="40"
+            height="40"
+            class="h-10 w-10 object-contain"
+            loading="eager"
+            decoding="async"
+          />
           <div class="leading-tight">
             <div class="font-display font-bold text-burgundy-500 text-lg">Precise MBC</div>
             <div class="text-xs text-gray-500 hidden sm:block">Medical Billing & Coding</div>
@@ -45,6 +52,7 @@ const base = `/${lang}`;
 
         <!-- Actions -->
         <div class="flex items-center gap-3">
+          <ThemeToggle lang={lang} />
           <LanguageSwitcher lang={lang} />
           <Button href={`${base}#contact`} size="sm" class="hidden sm:inline-flex">
             {t('nav.cta')}
@@ -102,6 +110,12 @@ const base = `/${lang}`;
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(29, 78, 216, 0.1);
     box-shadow: 0 2px 20px -4px rgba(29, 78, 216, 0.1);
+  }
+
+  :global(html[data-theme='dark']) #site-header.scrolled .header-inner {
+    background: rgba(2, 6, 23, 0.82);
+    border-bottom: 1px solid rgba(148, 163, 184, 0.16);
+    box-shadow: 0 8px 30px -20px rgba(2, 6, 23, 0.9);
   }
 </style>
 

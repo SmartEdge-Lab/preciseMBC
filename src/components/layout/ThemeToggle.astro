@@ -1,0 +1,122 @@
+---
+import { Icon } from 'astro-icon/components';
+import type { Lang } from '../../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+const copy = lang === 'es'
+  ? {
+      label: 'Cambiar tema',
+      light: 'Claro',
+      dark: 'Oscuro',
+    }
+  : {
+      label: 'Change theme',
+      light: 'Light',
+      dark: 'Dark',
+    };
+---
+
+<div
+  class="theme-toggle inline-flex items-center gap-1 rounded-full border border-burgundy-200 bg-white/70 p-1 shadow-sm backdrop-blur-sm"
+  role="group"
+  aria-label={copy.label}
+>
+  <button
+    type="button"
+    class="theme-toggle-option"
+    data-theme-option="light"
+    aria-label={copy.light}
+    title={copy.light}
+  >
+    <Icon name="lucide:sun-medium" class="h-4 w-4" aria-hidden="true" />
+  </button>
+  <button
+    type="button"
+    class="theme-toggle-option"
+    data-theme-option="dark"
+    aria-label={copy.dark}
+    title={copy.dark}
+  >
+    <Icon name="lucide:moon-star" class="h-4 w-4" aria-hidden="true" />
+  </button>
+</div>
+
+<script>
+  const syncThemeToggle = () => {
+    const root = document.documentElement;
+    const preference = root.dataset.themePreference || 'system';
+    const activeTheme = preference === 'system'
+      ? (root.dataset.theme || 'light')
+      : preference;
+
+    document.querySelectorAll('.theme-toggle-option').forEach((button) => {
+      const isActive = button.getAttribute('data-theme-option') === activeTheme;
+      button.setAttribute('aria-pressed', String(isActive));
+      button.classList.toggle('is-active', isActive);
+    });
+  };
+
+  const setThemePreference = window.__setThemePreference;
+
+  document.querySelectorAll('.theme-toggle-option').forEach((button) => {
+    button.addEventListener('click', () => {
+      const preference = button.getAttribute('data-theme-option');
+      if (!preference || typeof setThemePreference !== 'function') return;
+      setThemePreference(preference);
+    });
+  });
+
+  syncThemeToggle();
+  window.addEventListener('themechange', syncThemeToggle);
+</script>
+
+<style>
+  .theme-toggle-option {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 9999px;
+    color: #475569;
+    transition:
+      background-color 150ms ease,
+      color 150ms ease,
+      box-shadow 150ms ease;
+  }
+
+  .theme-toggle-option:hover {
+    background: rgba(15, 23, 42, 0.06);
+    color: #0f172a;
+  }
+
+  .theme-toggle-option.is-active {
+    background: #0f172a;
+    color: #f8fafc;
+    box-shadow: 0 1px 2px rgb(15 23 42 / 0.14);
+  }
+
+  :global(html[data-theme='dark']) .theme-toggle {
+    border-color: rgba(148, 163, 184, 0.28);
+    background: rgba(15, 23, 42, 0.78);
+  }
+
+  :global(html[data-theme='dark']) .theme-toggle-option {
+    color: #94a3b8;
+  }
+
+  :global(html[data-theme='dark']) .theme-toggle-option:hover {
+    background: rgba(148, 163, 184, 0.1);
+    color: #e2e8f0;
+  }
+
+  :global(html[data-theme='dark']) .theme-toggle-option.is-active {
+    background: #e2e8f0;
+    color: #0f172a;
+  }
+</style>

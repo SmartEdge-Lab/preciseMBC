@@ -19,13 +19,22 @@ const base = `/${lang}`;
 
       <!-- Brand column -->
       <div class="lg:col-span-1">
-        <a href={base} class="flex items-center gap-2.5 mb-4">
-          <div class="w-8 h-8 rounded-lg bg-burgundy-500 flex items-center justify-center">
-            <Icon name="lucide:file-check-2" class="w-4 h-4 text-white" aria-hidden="true" />
+        <a href={base} class="mb-4 flex items-center gap-3">
+          <img
+            src="/logo_white.png"
+            alt="Precise MBC logo"
+            width="40"
+            height="40"
+            class="h-10 w-10 object-contain"
+            loading="lazy"
+            decoding="async"
+          />
+          <div>
+            <span class="font-display text-lg font-bold text-white">Precise MBC</span>
+            <div class="text-xs text-gray-500">Medical Billing & Coding</div>
           </div>
-          <span class="font-display font-bold text-white text-lg">Precise MBC</span>
         </a>
-        <p class="text-sm text-gray-400 leading-relaxed mb-6">{t('footer.tagline')}</p>
+        <p class="mb-6 text-sm leading-relaxed text-gray-400">{t('footer.tagline')}</p>
 
         <!-- Contact info -->
         <div class="space-y-2 text-sm">
