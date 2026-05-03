@@ -1,0 +1,60 @@
+---
+interface Props {
+  alt: string;
+  width: number;
+  height: number;
+  class?: string;
+  wrapperClass?: string;
+  loading?: 'eager' | 'lazy';
+  decoding?: 'sync' | 'async' | 'auto';
+}
+
+const {
+  alt,
+  width,
+  height,
+  class: className = '',
+  wrapperClass = '',
+  loading = 'eager',
+  decoding = 'async',
+} = Astro.props;
+---
+
+<span class={`theme-logo ${wrapperClass}`} aria-hidden="true">
+  <img
+    src="/logo.png"
+    alt={alt}
+    class={`theme-logo-light ${className}`}
+    width={width}
+    height={height}
+    loading={loading}
+    decoding={decoding}
+  />
+  <img
+    src="/logo_white.png"
+    alt={alt}
+    class={`theme-logo-dark ${className}`}
+    width={width}
+    height={height}
+    loading={loading}
+    decoding={decoding}
+  />
+</span>
+
+<style>
+  .theme-logo {
+    display: inline-block;
+  }
+
+  .theme-logo-dark {
+    display: none;
+  }
+
+  :global(html[data-theme='dark']) .theme-logo-light {
+    display: none;
+  }
+
+  :global(html[data-theme='dark']) .theme-logo-dark {
+    display: block;
+  }
+</style>

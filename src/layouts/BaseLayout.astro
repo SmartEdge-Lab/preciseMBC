@@ -25,6 +25,9 @@ const alternateUrl = new URL(
   `${getLocalizedPath(Astro.url.pathname, alternateLang)}${Astro.url.search}`,
   Astro.site ?? Astro.url,
 ).href;
+const themeStorageKey = 'precise-theme-preference';
+const faviconLight = '/favicon.png';
+const faviconDark = '/favicon-white.png';
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -67,6 +70,10 @@ const jsonLd = {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/png" sizes="32x32" href={faviconLight} media="(prefers-color-scheme: light)" />
+    <link rel="icon" type="image/png" sizes="32x32" href={faviconDark} media="(prefers-color-scheme: dark)" />
+    <link rel="icon" type="image/png" sizes="192x192" href={faviconLight} />
+    <link rel="apple-touch-icon" href={faviconLight} />
 
     <SEO
       title={title}
@@ -93,7 +100,6 @@ const jsonLd = {
       }}
       extend={{
         link: [
-          { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
           { rel: 'alternate', hreflang: lang, href: canonical },
           { rel: 'alternate', hreflang: alternateLang, href: alternateUrl },
           { rel: 'alternate', hreflang: 'x-default', href: 'https://precisembc.com/en/' },
@@ -119,6 +125,63 @@ const jsonLd = {
     />
 
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <script is:inline define:vars={{ faviconLight, faviconDark, themeStorageKey }}>
+      const themeMedia = window.matchMedia('(prefers-color-scheme: dark)');
+      const root = document.documentElement;
+
+      const getSystemTheme = () => themeMedia.matches ? 'dark' : 'light';
+
+      const updateFavicon = (theme) => {
+        const head = document.head;
+        if (!head) return;
+
+        let icon = document.querySelector('link[data-dynamic-favicon="true"]');
+        if (!icon) {
+          icon = document.createElement('link');
+          icon.setAttribute('rel', 'icon');
+          icon.setAttribute('type', 'image/png');
+          icon.setAttribute('data-dynamic-favicon', 'true');
+          head.appendChild(icon);
+        }
+
+        icon.setAttribute('href', theme === 'dark' ? faviconDark : faviconLight);
+      };
+
+      const updateThemeColor = (theme) => {
+        const meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) {
+          meta.setAttribute('content', theme === 'dark' ? '#020617' : '#1d4ed8');
+        }
+      };
+
+      const applyThemePreference = (preference) => {
+        const nextPreference = ['light', 'dark', 'system'].includes(preference) ? preference : 'system';
+        const resolvedTheme = nextPreference === 'system' ? getSystemTheme() : nextPreference;
+
+        root.dataset.themePreference = nextPreference;
+        root.dataset.theme = resolvedTheme;
+        root.style.colorScheme = resolvedTheme;
+
+        localStorage.setItem(themeStorageKey, nextPreference);
+        updateFavicon(resolvedTheme);
+        updateThemeColor(resolvedTheme);
+
+        window.dispatchEvent(new CustomEvent('themechange', {
+          detail: { preference: nextPreference, theme: resolvedTheme },
+        }));
+      };
+
+      window.__setThemePreference = applyThemePreference;
+      window.__getThemePreference = () => root.dataset.themePreference || 'system';
+
+      applyThemePreference(localStorage.getItem(themeStorageKey) || 'system');
+
+      themeMedia.addEventListener('change', () => {
+        if ((root.dataset.themePreference || 'system') === 'system') {
+          applyThemePreference('system');
+        }
+      });
+    </script>
   </head>
 
   <body class="antialiased">

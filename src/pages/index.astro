@@ -1,8 +1,11 @@
 ---
-import { Icon } from 'astro-icon/components';
 import '../styles/global.css';
+import ThemeLogo from '../components/ui/ThemeLogo.astro';
 
 const defaultLocalePath = '/en/';
+const themeStorageKey = 'precise-theme-preference';
+const faviconLight = '/favicon.png';
+const faviconDark = '/favicon-white.png';
 ---
 
 <!doctype html>
@@ -11,8 +14,57 @@ const defaultLocalePath = '/en/';
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex, follow" />
+    <link rel="icon" type="image/png" sizes="32x32" href={faviconLight} media="(prefers-color-scheme: light)" />
+    <link rel="icon" type="image/png" sizes="32x32" href={faviconDark} media="(prefers-color-scheme: dark)" />
+    <link rel="icon" type="image/png" sizes="192x192" href={faviconLight} />
+    <link rel="apple-touch-icon" href={faviconLight} />
     <meta http-equiv="refresh" content={`1;url=${defaultLocalePath}`} />
     <title>Precise MBC | Loading</title>
+    <script is:inline define:vars={{ faviconLight, faviconDark, themeStorageKey }}>
+      const themeMedia = window.matchMedia('(prefers-color-scheme: dark)');
+      const root = document.documentElement;
+
+      const getSystemTheme = () => themeMedia.matches ? 'dark' : 'light';
+
+      const updateFavicon = (theme) => {
+        const head = document.head;
+        if (!head) return;
+
+        let icon = document.querySelector('link[data-dynamic-favicon="true"]');
+        if (!icon) {
+          icon = document.createElement('link');
+          icon.setAttribute('rel', 'icon');
+          icon.setAttribute('type', 'image/png');
+          icon.setAttribute('data-dynamic-favicon', 'true');
+          head.appendChild(icon);
+        }
+
+        icon.setAttribute('href', theme === 'dark' ? faviconDark : faviconLight);
+      };
+
+      const applyThemePreference = (preference) => {
+        const nextPreference = ['light', 'dark', 'system'].includes(preference) ? preference : 'system';
+        const resolvedTheme = nextPreference === 'system' ? getSystemTheme() : nextPreference;
+
+        root.dataset.themePreference = nextPreference;
+        root.dataset.theme = resolvedTheme;
+        root.style.colorScheme = resolvedTheme;
+
+        localStorage.setItem(themeStorageKey, nextPreference);
+        updateFavicon(resolvedTheme);
+      };
+
+      window.__setThemePreference = applyThemePreference;
+      window.__getThemePreference = () => root.dataset.themePreference || 'system';
+
+      applyThemePreference(localStorage.getItem(themeStorageKey) || 'system');
+
+      themeMedia.addEventListener('change', () => {
+        if ((root.dataset.themePreference || 'system') === 'system') {
+          applyThemePreference('system');
+        }
+      });
+    </script>
     <script is:inline define:vars={{ defaultLocalePath }}>
       window.setTimeout(() => {
         window.location.replace(defaultLocalePath);
@@ -26,9 +78,15 @@ const defaultLocalePath = '/en/';
         aria-labelledby="redirect-title"
         aria-describedby="redirect-description"
       >
-        <div class="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-burgundy-500 shadow-card">
-          <Icon name="lucide:file-check-2" class="h-7 w-7 text-white" aria-hidden="true" />
-        </div>
+        <ThemeLogo
+          alt="Precise MBC logo"
+          wrapperClass="mx-auto mb-6"
+          class="h-16 w-16 rounded-xl object-contain shadow-card"
+          width="64"
+          height="64"
+          loading="eager"
+          decoding="async"
+        />
 
         <p class="mb-2 text-sm font-semibold uppercase tracking-[0.12em] text-dusty-rose-600">
           Precise MBC
