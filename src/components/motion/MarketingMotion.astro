@@ -1,0 +1,126 @@
+<script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const root = document.querySelector<HTMLElement>('[data-page="marketing-home"]');
+
+  if (root && !root.dataset.motionInitialized) {
+    root.dataset.motionInitialized = 'true';
+    document.documentElement.classList.add('js');
+
+    const mm = gsap.matchMedia();
+    const hoverCleanups: Array<() => void> = [];
+
+    const setupHoverLift = () => {
+      const hoverTargets = root.querySelectorAll<HTMLElement>('[data-motion-hover]');
+
+      hoverTargets.forEach((element) => {
+        const enter = () => gsap.to(element, {
+          y: -4,
+          duration: 0.28,
+          ease: 'power2.out',
+          overwrite: 'auto',
+        });
+
+        const leave = () => gsap.to(element, {
+          y: 0,
+          duration: 0.32,
+          ease: 'power2.out',
+          overwrite: 'auto',
+        });
+
+        element.addEventListener('mouseenter', enter);
+        element.addEventListener('mouseleave', leave);
+        element.addEventListener('focusin', enter);
+        element.addEventListener('focusout', leave);
+
+        hoverCleanups.push(() => {
+          element.removeEventListener('mouseenter', enter);
+          element.removeEventListener('mouseleave', leave);
+          element.removeEventListener('focusin', enter);
+          element.removeEventListener('focusout', leave);
+        });
+      });
+    };
+
+    mm.add('(prefers-reduced-motion: no-preference)', () => {
+      const heroCopy = root.querySelectorAll<HTMLElement>('[data-motion-hero-copy]');
+      const heroVisual = root.querySelector<HTMLElement>('[data-motion-hero-visual]');
+      const heroStats = root.querySelectorAll<HTMLElement>('[data-motion-hero-stat]');
+
+      const heroTimeline = gsap.timeline({
+        defaults: {
+          duration: 0.72,
+          ease: 'power2.out',
+        },
+      });
+
+      heroTimeline
+        .from(heroCopy, {
+          autoAlpha: 0,
+          y: 20,
+          stagger: 0.1,
+          clearProps: 'transform,opacity,visibility,will-change',
+        })
+        .from(heroVisual, {
+          autoAlpha: 0,
+          y: 26,
+          scale: 0.985,
+          duration: 0.86,
+          clearProps: 'transform,opacity,visibility,will-change',
+        }, 0.12)
+        .from(heroStats, {
+          autoAlpha: 0,
+          y: 16,
+          stagger: 0.08,
+          duration: 0.52,
+          clearProps: 'transform,opacity,visibility,will-change',
+        }, 0.32);
+
+      const groups = root.querySelectorAll<HTMLElement>('[data-motion-group]');
+
+      groups.forEach((group) => {
+        const items = group.querySelectorAll<HTMLElement>('[data-motion-item]');
+        const targets = items.length > 0 ? Array.from(items) : [group];
+
+        gsap.from(targets, {
+          autoAlpha: 0,
+          y: 24,
+          duration: 0.7,
+          stagger: targets.length > 1 ? 0.1 : 0,
+          ease: 'power2.out',
+          clearProps: 'transform,opacity,visibility,will-change',
+          scrollTrigger: {
+            trigger: group,
+            start: 'top 82%',
+            once: true,
+          },
+        });
+      });
+
+      setupHoverLift();
+
+      return () => {
+        heroTimeline.kill();
+        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+        hoverCleanups.splice(0).forEach((cleanup) => cleanup());
+      };
+    });
+
+    mm.add('(prefers-reduced-motion: reduce)', () => {
+      hoverCleanups.splice(0).forEach((cleanup) => cleanup());
+      gsap.set(
+        root.querySelectorAll('[data-motion-item],[data-motion-group],[data-motion-hero-copy],[data-motion-hero-visual],[data-motion-hero-stat],[data-motion-hover]'),
+        { clearProps: 'all' },
+      );
+    });
+
+    window.addEventListener('pagehide', () => {
+      mm.revert();
+      hoverCleanups.splice(0).forEach((cleanup) => cleanup());
+      delete root.dataset.motionInitialized;
+    }, { once: true });
+  }
+</script>

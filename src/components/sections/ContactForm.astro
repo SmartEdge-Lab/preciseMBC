@@ -17,7 +17,7 @@ const t = useTranslations(lang);
 
 <Section id="contact" bg="white">
   <Container>
-    <div class="text-center max-w-2xl mx-auto mb-12">
+    <div class="mx-auto mb-12 max-w-2xl text-center" data-motion-group>
       <Badge variant="rose" class="mb-4">{t('contact.eyebrow')}</Badge>
       <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-burgundy-500 mb-4">
         {t('contact.title')}
@@ -25,10 +25,10 @@ const t = useTranslations(lang);
       <p class="text-lg text-gray-600">{t('contact.subtitle')}</p>
     </div>
 
-    <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+    <div class="grid items-start gap-8 lg:grid-cols-2 lg:gap-12">
 
       <!-- Contact Form -->
-      <div class="bg-white rounded-lg border border-slate-200 shadow-card p-6 sm:p-8">
+      <div class="rounded-lg border border-slate-200 bg-white p-6 shadow-card sm:p-8" data-motion-group>
         <form
           id="contact-form"
           name="practice-inquiry"
@@ -172,9 +172,9 @@ const t = useTranslations(lang);
       </div>
 
       <!-- Right: contact info -->
-      <div class="space-y-6">
+      <div class="space-y-6" data-motion-group>
         <!-- Contact quick info -->
-        <div class="bg-ivory-50 rounded-lg p-6 border border-burgundy-100">
+        <div class="rounded-lg border border-burgundy-100 bg-ivory-50 p-6" data-motion-hover>
           <h3 class="text-base font-semibold text-gray-900 mb-4">{t('contact.quickinfo.title')}</h3>
           <div class="space-y-3 text-sm">
             <a href={`tel:${t('contact.info.phone').replace(/\D/g, '')}`} class="flex items-center gap-3 text-gray-600 hover:text-burgundy-600 transition-colors">

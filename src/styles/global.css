@@ -77,6 +77,15 @@
     background-color: var(--app-bg);
   }
 
+  html.js [data-motion-item],
+  html.js [data-motion-group],
+  html.js [data-motion-hero-copy],
+  html.js [data-motion-hero-visual],
+  html.js [data-motion-hero-stat],
+  html.js [data-motion-hover] {
+    will-change: transform, opacity;
+  }
+
   body {
     font-family: var(--font-sans);
     color: var(--app-text);

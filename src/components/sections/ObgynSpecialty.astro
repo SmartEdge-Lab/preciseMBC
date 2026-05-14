@@ -29,7 +29,7 @@ const risks = [
     <div class="grid lg:grid-cols-[0.85fr_1.15fr] gap-10 lg:gap-14 items-start">
 
       <!-- Left: Content -->
-      <div class="lg:sticky lg:top-28">
+      <div class="lg:sticky lg:top-28" data-motion-group>
         <Badge variant="plum" class="mb-4">{t('obgyn.eyebrow')}</Badge>
         <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-burgundy-500 mb-6">
           {t('obgyn.title')}
@@ -53,9 +53,9 @@ const risks = [
       </div>
 
       <!-- Right: revenue risk cards -->
-      <div class="grid sm:grid-cols-2 gap-4">
+      <div class="grid gap-4 sm:grid-cols-2" data-motion-group>
         {risks.map(({ num, icon }) => (
-          <article class="rounded-lg border border-slate-200 bg-white p-5 shadow-card transition-colors duration-200 hover:border-dusty-rose-500">
+          <article class="rounded-lg border border-slate-200 bg-white p-5 shadow-card transition-colors duration-200 hover:border-dusty-rose-500" data-motion-item>
             <div class="mb-4 flex h-10 w-10 items-center justify-center rounded-lg border border-sky-100 bg-sky-50 text-dusty-rose-500">
               <Icon name={icon} class="h-5 w-5" aria-hidden="true" />
             </div>
@@ -68,7 +68,7 @@ const risks = [
           </article>
         ))}
 
-        <div class="rounded-lg border border-plum-100 bg-plum-50 p-5 sm:col-span-2">
+        <div class="rounded-lg border border-plum-100 bg-plum-50 p-5 sm:col-span-2" data-motion-item data-motion-hover>
           <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <h3 class="text-base font-semibold text-plum-700">{t('obgyn.outcome.title')}</h3>

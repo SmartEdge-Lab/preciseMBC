@@ -25,20 +25,20 @@ const stepIcons = [
 
 <Section id="process" bg="ivory">
   <Container>
-    <div class="text-center max-w-2xl mx-auto mb-12 lg:mb-16">
+    <div class="mx-auto mb-12 max-w-2xl text-center lg:mb-16" data-motion-group>
       <Badge variant="rose" class="mb-4">{t('process.eyebrow')}</Badge>
       <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-burgundy-500">
         {t('process.title')}
       </h2>
     </div>
 
-    <div class="relative">
+    <div class="relative" data-motion-group>
       <!-- Connector line (desktop) -->
       <div class="hidden lg:block absolute top-16 left-1/8 right-1/8 h-0.5 bg-gradient-to-r from-burgundy-200 via-dusty-rose-300 to-burgundy-200" aria-hidden="true"></div>
 
-      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
         {steps.map((step, i) => (
-          <div class="relative flex flex-col items-center text-center">
+          <div class="relative flex flex-col items-center text-center" data-motion-item>
             <!-- Step number + icon -->
             <div class="relative mb-6">
               <div class="w-16 h-16 rounded-lg bg-white border border-slate-200 text-dusty-rose-500 flex items-center justify-center shadow-card">
