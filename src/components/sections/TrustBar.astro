@@ -19,14 +19,14 @@ const badges = [
 ] as const;
 ---
 
-<div class="border-y border-burgundy-100 bg-white py-10">
+<div class="border-y border-burgundy-100 bg-white py-10" data-motion-section="trust">
   <Container>
-    <p class="text-center text-xs font-semibold tracking-widest uppercase text-gray-400 mb-7">
+    <p class="mb-7 text-center text-xs font-semibold uppercase tracking-widest text-gray-400" data-motion-group>
       {t('trust.title')}
     </p>
-    <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+    <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4" data-motion-group>
       {badges.map(({ title, desc, icon, color }) => (
-        <div class="flex items-start gap-3 rounded-lg border border-slate-200 bg-ivory-50 px-4 py-3">
+        <div class="flex items-start gap-3 rounded-lg border border-slate-200 bg-ivory-50 px-4 py-3" data-motion-item>
           <div class={`mt-0.5 w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${
             color === 'green' ? 'bg-green-100 text-green-600' :
             color === 'burgundy' ? 'bg-burgundy-100 text-burgundy-600' :

@@ -36,7 +36,7 @@ const plans = [
 
 <Section bg="white">
   <Container>
-    <div class="text-center max-w-2xl mx-auto mb-12 lg:mb-16">
+    <div class="mx-auto mb-12 max-w-2xl text-center lg:mb-16" data-motion-group>
       <Badge variant="plum" class="mb-4">{t('pricing.eyebrow')}</Badge>
       <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-burgundy-500 mb-4">
         {t('pricing.title')}
@@ -44,13 +44,13 @@ const plans = [
       <p class="text-lg text-gray-600">{t('pricing.subtitle')}</p>
     </div>
 
-    <div class="grid md:grid-cols-3 gap-6 items-center">
+    <div class="grid items-center gap-6 md:grid-cols-3" data-motion-group>
       {plans.map(({ num, featured, features }) => (
         <div class={`relative rounded-lg p-8 transition-colors duration-200 ${
           featured
             ? 'bg-burgundy-500 text-white shadow-card md:scale-[1.02]'
             : 'bg-white border border-slate-200 shadow-card hover:border-dusty-rose-500'
-        }`}>
+        }`} data-motion-item data-motion-hover>
           {featured && (
             <div class="absolute -top-4 left-1/2 -translate-x-1/2">
               <span class="px-4 py-1.5 text-xs font-bold tracking-wide uppercase rounded-md bg-champagne-400 text-gray-900 shadow-md">

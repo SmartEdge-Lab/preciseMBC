@@ -15,6 +15,7 @@ import FAQ from '../../components/sections/FAQ.astro';
 import Cta from '../../components/sections/Cta.astro';
 import ContactForm from '../../components/sections/ContactForm.astro';
 import WhatsAppFloat from '../../components/widgets/WhatsAppFloat.astro';
+import MarketingMotion from '../../components/motion/MarketingMotion.astro';
 import { useTranslations } from '../../i18n/utils';
 
 const lang = 'es';
@@ -27,7 +28,7 @@ const t = useTranslations(lang);
   lang={lang}
 >
   <Header lang={lang} />
-  <main id="main-content">
+  <main id="main-content" data-page="marketing-home">
     <Hero lang={lang} />
     <TrustBar lang={lang} />
     <Services lang={lang} />
@@ -41,6 +42,7 @@ const t = useTranslations(lang);
     <FAQ lang={lang} />
     <ContactForm lang={lang} />
   </main>
+  <MarketingMotion />
   <Footer lang={lang} />
   <WhatsAppFloat lang={lang} />
 </BaseLayout>

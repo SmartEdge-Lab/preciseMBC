@@ -15,6 +15,8 @@ pnpm-debug.log*
 
 # environment variables
 .env
+.env.*
+!.env.example
 .env.production
 
 # macOS-specific files
@@ -22,6 +24,11 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# local AI/dev tool state
+.claude/
+.codex.bak
+.opencode/
 
 # local planning notes
 tasks.md
